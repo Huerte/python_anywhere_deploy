@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>HaruuClub Store | Homepage</title> <!-- Updated Title -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BeverageMX | Premium Drink Store</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
   <style>
@@ -36,7 +37,7 @@
       background-color: #6f42c1; /* Purple background */
       position: relative;
       z-index: 1;
-      color: white; /* Ensures text stands out against the purple background */
+      color: white;
     }
 
     .navbar-brand {
@@ -60,32 +61,34 @@
       color: #ee4d2d;
     }
 
-    /* Navbar: Reverted to purple with white text */
     .navbar {
       background-color: #6f42c1 !important;
       padding: 0.5rem 1rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
 
     .navbar-nav .nav-item:hover {
-      background-color: #6f42c1; /* Purple hover effect for better visibility */
+      background-color: #5d35a5;
+      border-radius: 5px;
     }
 
     .navbar-nav .nav-link {
-      color: white !important; /* White text color in navbar */
+      color: white !important;
       padding: 0.75rem 1.5rem;
     }
 
-    /* Category Section Styling: Updated to Card-like Design */
     .category-card {
-      background-color: #444444 !important; /* Darker background for card effect */
+      background-color: #444444 !important;
       border-radius: 8px;
       padding: 1rem;
       text-align: center;
       box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, background-color 0.3s ease;
     }
 
     .category-card:hover {
-      background-color: #6f42c1;
+      background-color: #5d35a5;
+      transform: translateY(-5px);
     }
 
     .category img {
@@ -102,29 +105,107 @@
     }
 
     .text-muted {
-      color: #ccc !important; /* Muted text color for the footer */
+      color: #ccc !important;
     }
 
-    /* Testimonials Section Styling */
     .bg-light {
-      background-color: #333333 !important; /* Dark background for better contrast */
+      background-color: #333333 !important;
     }
 
     .text-light {
-      color: #fff !important; /* Ensures text is visible on dark background */
+      color: #fff !important;
     }
 
     .card-body {
-      color: #fff; /* Text color for testimonials */
+      color: #fff;
     }
 
     .card-footer {
       background-color: transparent;
-      color: #fff; /* Footer text color */
+      color: #fff;
     }
 
     .card {
-      background-color: #444444 !important; /* Darker background for testimonial cards */
+      background-color: #444444 !important;
+      transition: transform 0.3s ease;
+      border: none;
+      overflow: hidden;
+    }
+    
+    .card:hover {
+      transform: translateY(-5px);
+    }
+    
+    .badge-promo {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      z-index: 10;
+      font-size: 0.8rem;
+      padding: 5px 10px;
+    }
+    
+    .price-tag {
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+    
+    .hero-section {
+      background: linear-gradient(rgba(111, 66, 193, 0.8), rgba(111, 66, 193, 0.9)), url('https://images.unsplash.com/photo-1551024709-8f23befc6f87?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+      background-size: cover;
+      background-position: center;
+      padding: 5rem 0;
+      margin-bottom: 2rem;
+      border-radius: 0 0 20px 20px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+    
+    .card-img-top {
+      height: 200px;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    
+    .card:hover .card-img-top {
+      transform: scale(1.05);
+    }
+    
+    .btn-outline-light:hover {
+      background-color: #5d35a5;
+      border-color: #5d35a5;
+    }
+    
+    .section-title {
+      position: relative;
+      display: inline-block;
+      margin-bottom: 1.5rem;
+    }
+    
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 50px;
+      height: 3px;
+      background-color: #ee4d2d;
+    }
+    
+    .footer-link {
+      transition: transform 0.3s ease;
+      display: inline-block;
+    }
+    
+    .footer-link:hover {
+      transform: translateX(5px);
+    }
+    
+    .social-icon {
+      transition: transform 0.3s ease;
+    }
+    
+    .social-icon:hover {
+      transform: scale(1.2);
     }
   </style>
 </head>
@@ -134,147 +215,321 @@
   <div id="animated-bg"></div>
 
   <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-purple px-4">
-    <a class="navbar-brand d-flex align-items-center" href="#">
-      <img src="{{ url_for('static', filename='images/haruuclub.png') }}" alt="Logo" height="30" class="me-2">
-      HaruuClub Store <!-- Updated store name -->
-    </a>
-
-    <form class="d-flex mx-auto w-50">
-      <input class="form-control me-2" type="search" placeholder="Search products..." aria-label="Search">
-      <button class="btn btn-light" type="submit"><i class="fas fa-search"></i></button>
-    </form>
-
-    <div class="d-flex align-items-center">
-      <a href="#" class="btn btn-outline-light me-3 position-relative">
-        <i class="fas fa-shopping-cart"></i>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-purple px-4 sticky-top">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center" href="#">
+        <i class="fas fa-glass-cheers me-2"></i>
+        BeverageMX
       </a>
 
-      {% if username %}
-        <div class="dropdown">
-          <button class="btn btn-light dropdown-toggle btn-sm" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="fas fa-user-circle me-1"></i> {{ username }}
-          </button>
-          <ul class="dropdown-menu dropdown-menu-end">
-            <li><a class="dropdown-item" href="#">Profile</a></li>
-            <li><a class="dropdown-item" href="{{ url_for('logout') }}">Logout</a></li>
-          </ul>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarContent">
+        <form class="d-flex mx-auto w-50">
+          <input class="form-control me-2" type="search" placeholder="Search beverages..." aria-label="Search">
+          <button class="btn btn-light" type="submit"><i class="fas fa-search"></i></button>
+        </form>
+
+        <div class="d-flex align-items-center ms-auto">
+          <a href="#" class="btn btn-outline-light me-3 position-relative">
+            <i class="fas fa-shopping-cart"></i>
+            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+              0
+            </span>
+          </a>
+
+          <div class="dropdown">
+            <button class="btn btn-light dropdown-toggle btn-sm" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="fas fa-user-circle me-1"></i> My Account
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li><a class="dropdown-item" href="#">Profile</a></li>
+              <li><a class="dropdown-item" href="{{ url_for('login') }}">Login</a></li>
+              <li><a class="dropdown-item" href="{{ url_for('register') }}">Register</a></li>
+            </ul>
+          </div>
         </div>
-      {% else %}
-        <a href="{{ url_for('register') }}" class="btn btn-outline-light btn-sm me-2">Sign Up</a>
-        <a href="{{ url_for('login') }}" class="btn btn-light btn-sm">Login</a>
-      {% endif %}
+      </div>
     </div>
   </nav>
 
-  <!-- Menu -->
-<div class="bg-purple-500 py-3">
-  <div class="container">
-    <div class="row text-center">
-      <div class="col">
-        <a href="{{ url_for('fashion') }}" class="text-decoration-none text-white">
-          <div class="category-card">
-            <div class="menu-icon"><i class="fas fa-tshirt"></i></div>
-            <div class="category-text">Fashion</div>
-          </div>
-        </a>
-      </div>
-      <div class="col">
-        <a href="{{ url_for('shopee_beauty') }}" class="text-decoration-none text-white">
-          <div class="category-card">
-            <div class="menu-icon"><i class="fas fa-spa"></i></div>
-            <div class="category-text">Shopee Beauty</div>
-          </div>
-        </a>
-      </div>
-      <div class="col">
-        <a href="{{ url_for('vouchers') }}" class="text-decoration-none text-white">
-          <div class="category-card">
-            <div class="menu-icon"><i class="fas fa-ticket-alt"></i></div>
-            <div class="category-text">Vouchers</div>
-          </div>
-        </a>
-      </div>
-      <div class="col">
-        <a href="{{ url_for('rewards') }}" class="text-decoration-none text-white">
-          <div class="category-card">
-            <div class="menu-icon"><i class="fas fa-gift"></i></div>
-            <div class="category-text">Rewards</div>
-          </div>
-        </a>
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="container text-center">
+      <h1 class="display-4 fw-bold mb-4">Mexico's Finest Beverages</h1>
+      <p class="lead mb-4">Discover our selection of traditional and modern drinks at the best prices</p>
+      <a href="#products" class="btn btn-light btn-lg">View Products</a>
+    </div>
+  </section>
+
+  <!-- Menu Categories -->
+  <div class="bg-purple-500 py-3">
+    <div class="container">
+      <div class="row text-center g-3">
+        <div class="col-6 col-md-3">
+          <a href="#" class="text-decoration-none text-white">
+            <div class="category-card">
+              <div class="menu-icon"><i class="fas fa-coffee"></i></div>
+              <div class="category-text">Coffee</div>
+            </div>
+          </a>
+        </div>
+        <div class="col-6 col-md-3">
+          <a href="#" class="text-decoration-none text-white">
+            <div class="category-card">
+              <div class="menu-icon"><i class="fas fa-wine-bottle"></i></div>
+              <div class="category-text">Wine</div>
+            </div>
+          </a>
+        </div>
+        <div class="col-6 col-md-3">
+          <a href="#" class="text-decoration-none text-white">
+            <div class="category-card">
+              <div class="menu-icon"><i class="fas fa-beer"></i></div>
+              <div class="category-text">Beer</div>
+            </div>
+          </a>
+        </div>
+        <div class="col-6 col-md-3">
+          <a href="#" class="text-decoration-none text-white">
+            <div class="category-card">
+              <div class="menu-icon"><i class="fas fa-glass-whiskey"></i></div>
+              <div class="category-text">Spirits</div>
+            </div>
+          </a>
+        </div>
       </div>
     </div>
   </div>
-</div>
-
-
 
   <!-- Flash Sale -->
-  <div class="container my-5">
-    <h5 class="mb-4">
-      <i class="fa-solid fa-bolt text-warning"></i> Flash Sale
+  <div class="container my-5" id="products">
+    <h5 class="mb-4 section-title">
+      <i class="fa-solid fa-bolt text-warning"></i> Special Offers
     </h5>
-    <div class="row row-cols-2 row-cols-md-4 g-4">
-      {% for i in range(4) %}
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
       <div class="col">
         <div class="card h-100 border-0 shadow-sm position-relative">
-          <span class="badge bg-danger position-absolute top-0 start-0 m-2">-50%</span>
-          <img src="{{ url_for('static', filename='images/store' ~ (i + 1) ~ '.webp') }}" class="card-img-top rounded-top" alt="Sale item {{ i + 1 }}">
+          <span class="badge bg-danger position-absolute badge-promo">-30%</span>
+          <img src="https://images.unsplash.com/photo-1544145945-f90425340c7e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" class="card-img-top" alt="Chiapas Coffee">
           <div class="card-body d-flex flex-column text-center">
-            <h6 class="card-title mb-1">Hot Item {{ i + 1 }}</h6>
+            <h6 class="card-title mb-1">Premium Chiapas Coffee</h6>
             <div class="mb-2">
               <small class="text-warning">
-                ★★★★☆ <!-- Replace with real rating system -->
+                ★★★★★
               </small>
             </div>
             <p class="mb-2">
-              <span class="text-danger fw-bold fs-6">$2.99</span>
-              <small class="text-muted text-decoration-line-through">$19.99</small>
+              <span class="text-danger fw-bold price-tag">$149 MXN</span>
+              <small class="text-muted text-decoration-line-through">$210 MXN</small>
             </p>
             <div class="mt-auto">
-              <button class="btn btn-outline-primary btn-sm w-100">
+              <button class="btn btn-outline-light btn-sm w-100">
                 <i class="fa fa-shopping-cart me-1"></i> Add to Cart
               </button>
             </div>
           </div>
         </div>
       </div>
-      {% endfor %}
+      <div class="col">
+        <div class="card h-100 border-0 shadow-sm position-relative">
+          <span class="badge bg-danger position-absolute badge-promo">-25%</span>
+          <img src="https://images.unsplash.com/photo-1566633806327-68e152aaf26d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" class="card-img-top" alt="Tequila">
+          <div class="card-body d-flex flex-column text-center">
+            <h6 class="card-title mb-1">Artisanal Reposado Tequila</h6>
+            <div class="mb-2">
+              <small class="text-warning">
+                ★★★★☆
+              </small>
+            </div>
+            <p class="mb-2">
+              <span class="text-danger fw-bold price-tag">$399 MXN</span>
+              <small class="text-muted text-decoration-line-through">$530 MXN</small>
+            </p>
+            <div class="mt-auto">
+              <button class="btn btn-outline-light btn-sm w-100">
+                <i class="fa fa-shopping-cart me-1"></i> Add to Cart
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card h-100 border-0 shadow-sm position-relative">
+          <span class="badge bg-danger position-absolute badge-promo">-40%</span>
+          <img src="https://images.unsplash.com/photo-1600788886242-5c96aabe3757?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" class="card-img-top" alt="Craft Beer">
+          <div class="card-body d-flex flex-column text-center">
+            <h6 class="card-title mb-1">6-Pack Craft Beer</h6>
+            <div class="mb-2">
+              <small class="text-warning">
+                ★★★★★
+              </small>
+            </div>
+            <p class="mb-2">
+              <span class="text-danger fw-bold price-tag">$179 MXN</span>
+              <small class="text-muted text-decoration-line-through">$299 MXN</small>
+            </p>
+            <div class="mt-auto">
+              <button class="btn btn-outline-light btn-sm w-100">
+                <i class="fa fa-shopping-cart me-1"></i> Add to Cart
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card h-100 border-0 shadow-sm position-relative">
+          <span class="badge bg-danger position-absolute badge-promo">-20%</span>
+          <img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" class="card-img-top" alt="Hibiscus Water">
+          <div class="card-body d-flex flex-column text-center">
+            <h6 class="card-title mb-1">Organic Hibiscus Water</h6>
+            <div class="mb-2">
+              <small class="text-warning">
+                ★★★★☆
+              </small>
+            </div>
+            <p class="mb-2">
+              <span class="text-danger fw-bold price-tag">$39 MXN</span>
+              <small class="text-muted text-decoration-line-through">$49 MXN</small>
+            </p>
+            <div class="mt-auto">
+              <button class="btn btn-outline-light btn-sm w-100">
+                <i class="fa fa-shopping-cart me-1"></i> Add to Cart
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- New Products -->
+  <div class="container my-5">
+    <h5 class="mb-4 section-title">
+      <i class="fa-solid fa-star text-warning"></i> New Arrivals
+    </h5>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
+      <div class="col">
+        <div class="card h-100 border-0 shadow-sm">
+          <img src="https://images.unsplash.com/photo-1595981267035-7b04ca84a82d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" class="card-img-top" alt="Mezcal">
+          <div class="card-body d-flex flex-column text-center">
+            <h6 class="card-title mb-1">Oaxacan Mezcal</h6>
+            <div class="mb-2">
+              <small class="text-warning">
+                ★★★★★
+              </small>
+            </div>
+            <p class="mb-2">
+              <span class="text-light fw-bold price-tag">$450 MXN</span>
+            </p>
+            <div class="mt-auto">
+              <button class="btn btn-outline-light btn-sm w-100">
+                <i class="fa fa-shopping-cart me-1"></i> Add to Cart
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card h-100 border-0 shadow-sm">
+          <img src="https://images.unsplash.com/photo-1579954115545-a95591f28bfc?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" class="card-img-top" alt="Horchata">
+          <div class="card-body d-flex flex-column text-center">
+            <h6 class="card-title mb-1">Traditional Horchata</h6>
+            <div class="mb-2">
+              <small class="text-warning">
+                ★★★★☆
+              </small>
+            </div>
+            <p class="mb-2">
+              <span class="text-light fw-bold price-tag">$35 MXN</span>
+            </p>
+            <div class="mt-auto">
+              <button class="btn btn-outline-light btn-sm w-100">
+                <i class="fa fa-shopping-cart me-1"></i> Add to Cart
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card h-100 border-0 shadow-sm">
+          <img src="https://images.unsplash.com/photo-1587132137056-bfbf0166836e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" class="card-img-top" alt="Red Wine">
+          <div class="card-body d-flex flex-column text-center">
+            <h6 class="card-title mb-1">Valle de Guadalupe Red Wine</h6>
+            <div class="mb-2">
+              <small class="text-warning">
+                ★★★★★
+              </small>
+            </div>
+            <p class="mb-2">
+              <span class="text-light fw-bold price-tag">$320 MXN</span>
+            </p>
+            <div class="mt-auto">
+              <button class="btn btn-outline-light btn-sm w-100">
+                <i class="fa fa-shopping-cart me-1"></i> Add to Cart
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card h-100 border-0 shadow-sm">
+          <img src="https://images.unsplash.com/photo-1497534446932-c925b458314e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" class="card-img-top" alt="Hot Chocolate">
+          <div class="card-body d-flex flex-column text-center">
+            <h6 class="card-title mb-1">Oaxacan Hot Chocolate</h6>
+            <div class="mb-2">
+              <small class="text-warning">
+                ★★★★☆
+              </small>
+            </div>
+            <p class="mb-2">
+              <span class="text-light fw-bold price-tag">$85 MXN</span>
+            </p>
+            <div class="mt-auto">
+              <button class="btn btn-outline-light btn-sm w-100">
+                <i class="fa fa-shopping-cart me-1"></i> Add to Cart
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
   <!-- Testimonials -->
-  <section class="bg-light py-5">
+  <section class="bg-light py-5 rounded-4 my-5">
     <div class="container">
-      <h2 class="text-center mb-4 text-light"><i class="fa-solid fa-comment-dots me-2 text-danger"></i>What Our Shopee Users Have To Say</h2>
+      <h2 class="text-center mb-4 text-light"><i class="fa-solid fa-comment-dots me-2 text-danger"></i>What Our Customers Say</h2>
       <div class="row row-cols-1 row-cols-md-3 g-4">
         <div class="col">
           <div class="card h-100 shadow-sm border-0">
             <div class="card-body">
-              <p class="card-text">"Just a heads-up: trying to outrun the delivery guy? Don’t bother — he’s built different."</p>
+              <p class="card-text">"The best traditional Mexican beverages I've ever tried. The delivery service is fast and the products arrive in perfect condition."</p>
             </div>
             <div class="card-footer border-0 bg-transparent text-end text-muted small">
-              — sirfennn
+              — Carlos Ramírez
             </div>
           </div>
         </div>
         <div class="col">
           <div class="card h-100 shadow-sm border-0">
             <div class="card-body">
-              <p class="card-text">"Blinked once and my Haruuclub package was already at my door. Magic? Maybe. Impressive? Absolutely."</p>
+              <p class="card-text">"Amazing selection of mezcals and tequilas. The prices are very competitive and the quality is excellent. Highly recommended!"</p>
             </div>
             <div class="card-footer border-0 bg-transparent text-end text-muted small">
-              — m1ssminnn
+              — Maria González
             </div>
           </div>
         </div>
         <div class="col">
           <div class="card h-100 shadow-sm border-0">
             <div class="card-body">
-              <p class="card-text">"Best customer service I’ve ever experienced. Fast replies and helpful too!"</p>
+              <p class="card-text">"The Chiapas coffee is simply spectacular. I've been looking for a good Mexican coffee for a long time and I finally found it here."</p>
             </div>
             <div class="card-footer border-0 bg-transparent text-end text-muted small">
-              — kuuuyaruuuofficial
+              — John Smith
             </div>
           </div>
         </div>
@@ -282,6 +537,145 @@
     </div>
   </section>
 
+  <!-- Newsletter -->
+  <div class="container my-5">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="card border-0 shadow-sm">
+          <div class="card-body p-4 text-center">
+            <h4 class="mb-3">Subscribe to Our Newsletter</h4>
+            <p class="mb-4">Get the latest offers, new products, and exclusive discounts directly to your inbox.</p>
+            <form class="row g-2 justify-content-center">
+              <div class="col-md-8">
+                <input type="email" class="form-control" placeholder="Your email address">
+              </div>
+              <div class="col-md-4">
+                <button type="submit" class="btn btn-light w-100">Subscribe</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-white py-4 mt-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4 mb-3">
+          <h5>BeverageMX</h5>
+          <p class="small">Your store for traditional and modern Mexican beverages at the best market prices.</p>
+        </div>
+        <div class="col-md-2 mb-3">
+          <h5>Links</h5>
+          <ul class="nav flex-column">
+            <li class="nav-item"><a href="#" class="nav-link p-0 text-white footer-link">Home</a></li>
+            <li class="nav-item"><a href="#" class="nav-link p-0 text-white footer-link">Products</a></li>
+            <li class="nav-item"><a href="#" class="nav-link p-0 text-white footer-link">Offers</a></li>
+          </ul>
+        </div>
+        <div class="col-md-3 mb-3">
+          <h5>Contact</h5>
+          <ul class="nav flex-column">
+            <li class="nav-item"><a href="#" class="nav-link p-0 text-white footer-link">contact@beveragemx.com</a></li>
+            <li class="nav-item"><a href="#" class="nav-link p-0 text-white footer-link">+52 55 1234 5678</a></li>
+          </ul>
+        </div>
+        <div class="col-md-3 mb-3">
+          <h5>Follow Us</h5>
+          <div class="d-flex gap-3 fs-4">
+            <a href="#" class="text-white social-icon"><i class="fab fa-facebook"></i></a>
+            <a href="#" class="text-white social-icon"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="text-white social-icon"><i class="fab fa-twitter"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="border-top pt-3 mt-3">
+        <p class="text-center small">© 2025 BeverageMX - All rights reserved</p>
+      </div>
+    </div>
+  </footer>
+
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    // Update cart badge on page load
+    function updateCartBadge() {
+      $.get('/cart', function(data) {
+        $(".fa-shopping-cart").siblings('.badge').text(data.cart_count);
+      });
+    }
+    updateCartBadge();
+
+    // Add to Cart AJAX
+    $(document).on('click', '.btn-outline-light .fa-shopping-cart', function(e) {
+      e.preventDefault();
+      var $card = $(this).closest('.card');
+      var product = {
+        name: $card.find('.card-title').text().trim(),
+        price: $card.find('.price-tag').text().trim() || $card.find('.text-light.fw-bold.price-tag').text().trim(),
+        image: $card.find('img').attr('src')
+      };
+      $.ajax({
+        url: '/add_to_cart',
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify(product),
+        success: function(res) {
+          updateCartBadge();
+          showCartModal();
+        }
+      });
+    });
+
+    // Show cart modal with products
+    function showCartModal() {
+      $.get('/cart', function(data) {
+        var cartHtml = '<h5>Your Cart</h5>';
+        if (data.cart.length === 0) {
+          cartHtml += '<p>Your cart is empty.</p>';
+        } else {
+          cartHtml += '<ul class="list-group">';
+          data.cart.forEach(function(item) {
+            cartHtml += '<li class="list-group-item d-flex align-items-center">'
+              + '<img src="' + item.image + '" style="width:40px;height:40px;object-fit:cover;margin-right:10px;">'
+              + '<span>' + item.name + ' - ' + item.price + '</span>'
+              + '</li>';
+          });
+          cartHtml += '</ul>';
+        }
+        var modal = $(
+          '<div class="modal fade" id="cartModal" tabindex="-1">\
+            <div class="modal-dialog">\
+              <div class="modal-content">\
+                <div class="modal-header">\
+                  <h5 class="modal-title">Cart</h5>\
+                  <button type="button" class="btn-close" data-bs-dismiss="modal"></button>\
+                </div>\
+                <div class="modal-body">' + cartHtml + '</div>\
+                <div class="modal-footer">\
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>\
+                </div>\
+              </div>\
+            </div>\
+          </div>'
+        );
+        // Remove any existing modal
+        $('#cartModal').remove();
+        $('body').append(modal);
+        var cartModal = new bootstrap.Modal(document.getElementById('cartModal'));
+        cartModal.show();
+      });
+    }
+
+    // Show cart modal when cart icon is clicked
+    $(document).on('click', '.fa-shopping-cart', function(e) {
+      if ($(this).closest('button').length === 0) { // Only if not add-to-cart button
+        e.preventDefault();
+        showCartModal();
+      }
+    });
+  </script>
 </body>
 </html>

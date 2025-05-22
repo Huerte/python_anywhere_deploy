@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, flash, session
+from flask import Flask, render_template, request, redirect, url_for, flash, session, jsonify
 import pymysql
 
 app = Flask(__name__)
@@ -9,9 +9,8 @@ db_config = {
     'host': 'localhost',
     'user': 'root',
     'password': '',
-    'database': 'flask'
+    'database': 'beverage'  # changed from 'flask' to 'beverage'
 }
-
 
 def get_db_connection():
     return pymysql.connect(
@@ -21,11 +20,9 @@ def get_db_connection():
         database=db_config['database']
     )
 
-
 @app.route('/')
 def home():
     return redirect(url_for('login'))
-
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -46,11 +43,9 @@ def login():
             flash('Invalid credentials. Please try again.')
     return render_template('login.html')
 
-
 @app.route('/homepage')
 def homepage():
     return render_template('homepage.html', username=session.get('username'))
-
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -76,7 +71,6 @@ def register():
             errors.append("Username is already taken.")
 
         if errors:
-            # Send errors to template without redirecting
             return render_template('register.html', username=username, errors=errors)
 
         cursor.execute("INSERT INTO users(username, password) VALUES (%s, %s)", (username, password))
@@ -88,15 +82,11 @@ def register():
 
     return render_template('register.html')
 
-
 @app.route('/logout')
 def logout():
-    if 'username' in session:
-        session.clear()
-        flash("You have been logged out.")
-        return redirect(url_for('login'))
-    return redirect(url_for('homepage'))
-
+    session.clear()
+    flash("You have been logged out.")
+    return redirect(url_for('login'))
 
 @app.route('/forgot_password', methods=['GET', 'POST'])
 def forgot_password():
@@ -105,17 +95,16 @@ def forgot_password():
 
         conn = get_db_connection()
         cur = conn.cursor()
-
         cur.execute("SELECT * FROM users WHERE username=%s", (username,))
         user = cur.fetchone()
         conn.close()
+
         if user:
             return render_template('password-reset.html', username=username)
         else:
             flash('User does not exist.', 'error')
 
     return render_template('forgot-password.html')
-
 
 @app.route('/password_reset', methods=['GET', 'POST'])
 def password_reset():
@@ -130,7 +119,6 @@ def password_reset():
 
         conn = get_db_connection()
         cur = conn.cursor()
-
         cur.execute('UPDATE users SET password=%s WHERE username=%s', (password1, username))
         conn.commit()
         conn.close()
@@ -140,35 +128,20 @@ def password_reset():
 
     return render_template('password-reset.html')
 
+@app.route('/add_to_cart', methods=['POST'])
+def add_to_cart():
+    product = request.json
+    if 'cart' not in session:
+        session['cart'] = []
+    cart = session['cart']
+    cart.append(product)
+    session['cart'] = cart
+    return jsonify({'success': True, 'cart_count': len(cart)})
 
-# New category routes
-@app.route('/fashion')
-def fashion():
-    products = [
-        {"name": "Stylish Shirt", "price": "$12.99", "image": "fashion1.webp"},
-        {"name": "Trendy Jacket", "price": "$19.99", "image": "fashion2.webp"},
-        {"name": "Comfy Pants", "price": "$14.99", "image": "fashion3.webp"},
-    ]
-    return render_template("category.html", category="Fashion", products=products)
-
-
-@app.route('/shoppe-beauty')
-def shopee_beauty():
-    # Add the logic to display Shopee Beauty-related products or content
-    return render_template('shopee_beauty.html')
-
-
-@app.route('/vouchers')
-def vouchers():
-    # Add the logic to display vouchers-related products or content
-    return render_template('vouchers.html')
-
-
-@app.route('/rewards')
-def rewards():
-    # Add the logic to display rewards-related products or content
-    return render_template('rewards.html')
-
+@app.route('/cart')
+def get_cart():
+    cart = session.get('cart', [])
+    return jsonify({'cart': cart, 'cart_count': len(cart)})
 
 if __name__ == '__main__':
     app.run(debug=True)
